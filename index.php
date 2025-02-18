@@ -7,6 +7,9 @@ $query = "SELECT siswa.*, kelas.nama_kelas, wali_murid.nama_wali FROM siswa
             LEFT JOIN wali_murid ON siswa.id_kelas = wali_murid.id_wali";
 $result = mysqli_query($koneksi, $query);
 
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+// Mengatasi warning undefined variable
+
 ?>
     <!DOCTYPE html>
 <html lang="id">
@@ -26,6 +29,10 @@ $result = mysqli_query($koneksi, $query);
                 <a href="kelas.php" class="btn btn-primary">Kelola Kelas</a>
                 <a href="wali_murid.php" class="btn btn-primary">Kelola Wali Murid</a>
             </div>
+            <form method="GET" class="d-flex">
+                <input type="text" name="search" class="form-control me-2" placeholder="Cari..." value="<?php echo htmlspecialchars($search); ?>">
+                <button type="submit" class="btn btn-success">Cari</button>
+            </form>
             <a href="tambah_siswa.php" class="btn btn-success">Tambah Siswa</a>
         </div>
         <table class="table table-bordered">
